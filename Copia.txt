@@ -1,0 +1,2 @@
+El valor introducido en base 10 es: 4
+12334567789
