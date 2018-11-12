@@ -5,7 +5,7 @@
 
 #include <list>
 
-#include "../../U03_Pilas/Pila/nodo.h"
+#include "nodo.h"
 
 using namespace std;
 
@@ -261,7 +261,17 @@ void Lista<T>::reemplazar(int pos, T dato) {
  * @tparam T
  */
 template<class T>
-void Lista<T>::vaciar() {}
+void Lista<T>::vaciar() {
+    nodo<T> *borr;
+    nodo<T> *aux = inicio;
+
+    while (aux != nullptr) {
+        borr = aux;
+        aux = aux->getNext();
+        delete[] borr;
+    }
+    inicio = nullptr;
+}
 
 
 template<class T>

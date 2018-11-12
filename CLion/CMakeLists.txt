@@ -3,4 +3,4 @@ project(CLion)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(CLion Proyecto/main.cpp)
+add_executable(CLion Proyecto/main.cpp Colisiones/Lista.h Colisiones/OpenHashMap.h)

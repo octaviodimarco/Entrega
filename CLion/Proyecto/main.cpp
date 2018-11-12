@@ -1,11 +1,13 @@
 #include <iostream>
 #include <fstream>
-#include "../HashMap/HashMap.h"
+
+#include "../Colisiones/OpenHashMap.h"
+//#include "../HashMap/HashMapLista.h"
 
 using namespace std;
 
 unsigned int sad(string clave) {
-    int i=clave.length();
+    unsigned int i=clave.length();
 
     unsigned int res=0;
 
@@ -16,7 +18,7 @@ unsigned int sad(string clave) {
     return res;
 }
 
-int main() {
+int main(argc,argv) {
 //ofstream = salida
 //ifstream = entrada
 
@@ -27,16 +29,21 @@ int main() {
 
     ifstream fe("../../Diccionario.txt");
 
-    HashMap <string, string> hm(90, sad);
+    OpenHashMap <string, string> hm(2);
+
+    fe >> palabra;
+    fe >> convertida;
 
     while (!fe.eof()) {
-        fe >> palabra;
-        fe >> convertida;
+
+        cout<<palabra<<"    "<<convertida<<endl;
 
         hm.put(palabra, convertida);
+        fe >> palabra;
+        fe >> convertida;
     }
 
-
+    cout<<"La clave de presente es "<<hm.get("la")<<endl;
 
     fe.close();
     return 0;

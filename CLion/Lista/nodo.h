@@ -29,6 +29,9 @@ public:
     void setDato(T dato) {
         nodo::dato = dato;
     }
+    ~nodo(){
+        delete dato;
+    }
 };
 
 
