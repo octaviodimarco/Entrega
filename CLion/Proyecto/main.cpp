@@ -33,7 +33,7 @@ int main() {
 
     ifstream fe("../../Diccionario.txt");
 
-    OpenHashMap <string, string> hm(2);
+    OpenHashMap <string, string> hm(5000);
 
     fe >> palabra;
     fe >> convertida;

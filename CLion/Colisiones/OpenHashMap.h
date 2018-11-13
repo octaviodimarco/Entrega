@@ -8,6 +8,7 @@
 #include "../HashMap/HashEntry.h"
 #include "../Lista/Lista.h"
 
+
 template<class K, class T>
 class OpenHashMap {
 private:
@@ -63,7 +64,7 @@ T OpenHashMap<K, T>::get(K clave) {
     for (int i = 0; i < aux->getTamanio(); ++i)   //ya recorrio una vez la lista
         if (aux->getDato(i)->getKey() == clave)
             return aux->getDato(i)->getValue();
-    throw -1;
+    return(T) clave;
 }
 
 template<class K, class T>
