@@ -2,9 +2,11 @@
 #include <fstream>
 #include <string.h>
 #include <stdio.h>
+#include <locale.h>
+
+
 
 #include "../Colisiones/OpenHashMap.h"
-//#include "../HashMap/HashMapLista.h"
 
 using namespace std;
 
@@ -21,15 +23,46 @@ unsigned int sad(string clave) {
     return res;
 }
 
-int main() {
-//ofstream = salida
-//ifstream = entrada
+int main(int argc, char *argv[]) {
+
+    int l = 0;
+    int c = 0;
+    int o = 0;
+    int d = 0;
+    int ii = 0;
+    if (argc != 8){
+        cout<<"Se requieren mas elementos para seguir"<<endl;}
+    else{
+        for (int i = 0; i < argc; i ++) {
+            if (argv[i][0] == '-'){
+                if (argv[i][1] == 'c'){
+                    cout<<"El archivo siguiente va a ser codificado"<<endl;
+                    ifstream fe (argv[i + 1]);
+                }
+                else if (argv[i][1] == 'l'){
+                    cout<<"El siguiente archivo será seleccionado como diccionario"<<endl;
+                }
+                else if (argv[i][1] == 'o'){
+                    cout<<"El siguiente archivo será elegido como destino de texto"<<endl;
+                }
+                else if (argv[i][1] == 'd'){
+                    cout<<"Se codificará el archivo de entrada"<<endl;
+                }
+                else if (argv[i][1] == 'i'){
+                    cout<<"Archivo de texto a ser codificado o decodificado"<<endl;
+                }}
+            else
+                cout << "mala" << endl;
+        }
+
+    setlocale(LC_ALL, "");
+
 
     string palabra;
     string convertida;
 
 
-    ifstream fe("../../diccionario2.txt");
+    ifstream fe("../../Diccionario3.txt");
 
     OpenHashMap<string, string> hm(5000);
 
@@ -38,36 +71,32 @@ int main() {
 
     while (!fe.eof()) {
 
-//        cout << palabra << "    " << convertida << endl;
 
         hm.put(palabra, convertida);
         fe >> palabra;
         fe >> convertida;
     }
 
-//    cout << "La clave de mayor es " << hm.get("mayor") << endl;
-
     fe.close();
 
 
-    ifstream despacito("../../Datos2.txt");
+    ifstream datos("../../Datos2.txt");
     ofstream entrega("../../Pepito.txt");
 
     int b, k;
     string linea;
     string palabras[1000];
 
-    while (!despacito.eof()) {
+    while (!datos.eof()) {
 
-//       despacito>>palabra;
-        getline(despacito, linea);
-        // palabras = new string[linea.length()/2];
+        getline(datos, linea);
+
 
         b = 0;
         k = 0;
 
-        //linea[linea.length()]='\0';
-        for (int i = 0; i < linea.length() + 1; ++i) {
+
+        for (long i = 0; i < linea.length() + 1; ++i) {
             if (linea[i] == ' ' || linea[i] == '\n' || linea[i] == ',' || linea[i] == ')' || linea[i] == '('
                 || linea[i] == '\0' || linea[i] == '"' || linea[i] == '.' || linea[i] == ';' || linea[i] == ':') {
                 palabras[b] = linea.substr(k, i - k);
@@ -82,23 +111,14 @@ int main() {
                 size_t inicio = linea.find(palabras[j]);
 
                 linea.replace(inicio, palabras[j].length(), hm.get(palabras[j]));
-
-
             }
         }
 
         entrega << linea << endl;
 
-//                    entrega<<hm.get(palabra);
-//                    entrega<<" ";
     }
 
-//            for (int i = 0; i < palabra.length() ; ++i) {
-//                if (palabra[i] == a[0])
-//
-//            }
-//
     return 0;
 
 
-}
+}}
